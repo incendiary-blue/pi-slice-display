@@ -1,0 +1,25 @@
+$welcome-green: #29ABA4;
+$welcome-blue: #77C5F7;
+$welcome-darkblue: #354458;
+$welcome-red: #EB7260;
+
+.welcome{
+    height: 100vh;
+    background-color: $welcome-blue;
+
+    &__content{
+        font-family: 'raleway', Arial, san-serif;
+        color: $white;
+        top: 30%;
+        max-width: 700px;
+        text-align: center;
+        position: relative;
+        margin: 0 auto;
+        width: 60vh;
+
+        h1{
+            font-size: 4rem;
+            margin: 0;
+        }
+    }
+}

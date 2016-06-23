@@ -1,18 +1,17 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
     sass = require('gulp-sass'),
     del = require('del'),
-    concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    notify = require('gulp-notify'),
     sourcemaps = require('gulp-sourcemaps'),
     browserify = require('browserify'),
+    babelify = require('babelify'),
     browserSync = require('browser-sync').create();
 
 gulp.task('clean:dist', function () {
-  return del(['public/**/*']);
+  return del(['public/**/*', '!public/serial.js']);
 });
 
 gulp.task('sass', ['clean:dist'], function () {
@@ -21,23 +20,32 @@ gulp.task('sass', ['clean:dist'], function () {
             .pipe(gulp.dest('public/'));
 });
 
-gulp.task('js', function (){
-    browserify('src/app.js')
-        .bundle()
-        .on('error', function(e){
-            gutil.log(e);
-        })
-        .pipe(source('app.js'))
-        .pipe(gulp.dest('public/'));
+
+gulp.task('js', function () {
+  // set up the browserify instance on a task basis
+  var b = browserify({
+    entries: 'src/app.js',
+    debug: true
+  })
+  b.transform(babelify, {/* options */ });
+
+  return b.bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+        .pipe(uglify())
+        .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('public/'));
 });
 
 gulp.task('copy', ['clean:dist'], function() {
   return gulp.src([
-        'src/app.js',
-        'src/vue.js',
         'src/index.html',
         'src/components/*.*',
-        'src/img/**/*.*'
+        'src/img/**/*.*',
+        'src/fonts/**/*.*'
     ])
     .pipe(gulp.dest('public/'));
 });

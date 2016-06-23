@@ -1,3 +1,6 @@
-h1{
-    color: blue;
-}
+
+@import "normalise";
+@import "base";
+@import "fonts";
+
+@import "welcome";
