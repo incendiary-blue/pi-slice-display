@@ -1,6 +1,7 @@
 import Vue from './vue';
 import Welcome from './components/welcome';
 
+
 var vm = new Vue({
 
     el: '#app',
@@ -24,11 +25,11 @@ var vm = new Vue({
 
     ready(){
         console.log('Vue is running');
-        this.updateData();
+        /*this.updateData();*/
 
-        // setInterval(function () {
-        //   this.updateData();
-        // }.bind(this), 1000);
+        setInterval(function () {
+           this.updateData();
+        }.bind(this), 50000);
 
     },
 
@@ -39,8 +40,16 @@ var vm = new Vue({
     methods: {
 
         updateData: function () {
-          
+            this.$http.get('/', function (data, status, request) {
+                console.log('passed');
+                if data == currentView {
+                    console.log('dont update');
+                } else {
+                    console.log('update view');
+                }
+            }).error(function (data, status, request) {
+                console.log('get request failed');    
+            })
         }
-
     }
 });
