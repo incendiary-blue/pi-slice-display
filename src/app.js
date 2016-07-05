@@ -1,7 +1,6 @@
 import Vue from './vue';
 import Welcome from './components/welcome';
 
-
 var vm = new Vue({
 
     el: '#app',
@@ -40,16 +39,14 @@ var vm = new Vue({
     methods: {
 
         updateData: function () {
-            this.$http.get('/', function (data, status, request) {
-                console.log('passed');
-                if data == currentView {
-                    console.log('dont update');
-                } else {
-                    console.log('update view');
-                }
-            }).error(function (data, status, request) {
-                console.log('get request failed');    
-            })
+
+            this.$http.get('/google.com').then((response) => {
+            // success callback
+            console.log('success');
+            }, (response) => {
+            // error callback
+            console.log('failure');
+            });
         }
     }
 });
