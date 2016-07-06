@@ -8,10 +8,11 @@ var vm = new Vue({
 
     data: {
         // Store the last uuid from the server
-        uuid: false,
+        response: {},
+        currentUUID: 'default UUID',
 
         // Current Layout
-        currentView: 'stats',
+        currentView: 'welcome',
         data: {}
     },
 
@@ -23,7 +24,7 @@ var vm = new Vue({
 
     ready(){
         console.log('Vue is running');
-        /*this.updateData();*/
+        this.updateData();
 
         // setInterval(function () {
         //    this.updateData();
@@ -42,17 +43,31 @@ var vm = new Vue({
 
             // The connection URL is going to be www.pislice.online/getDisplayContent/{id}
 
-            this.$http.get('//pislice.online/getDisplayContent/' + this.serial).then((response) => {
+           /* this.$http.get('//pislice.online/getDisplayContent/' + this.serial).then((response) => {*/
                 // success callback
-                console.log('success');
+                console.log('Current UUID: ' + this.currentUUID);  
 
-                // $return = {
-                //     "UUID" : "12312-wefriwe234234",
-                //     "layout" : "welcome",
-                //     "data" : {
-                //         "message" : "This is the welcome message"
-                //     }
-                // }
+                this.repsonse = {
+                    'UUID' : "12312-wefriwe234234",
+                    "layout" : "welcome",
+                    "data" : {
+                        "message" : "This is the welcome message"
+                    }
+                }
+
+                this.repsonse.UUID === 'bob';
+                this.repsonse.UUID = this.currentUUID;
+
+                console.log('UUID from response: ' + this.repsonse.UUID);      
+                console.log('UUID after get: ' + this.currentUUID);  
+
+                // Check the UUID from the response against the UUID saved currently
+                if (this.repsonse.UUID == this.currentUUID) {
+                    console.log('uuid has been updated: '+ this.repsonse.UUID + 'vs' + this.currentUUID);  
+                } else {
+                    console.log('uuid not same - get new update');
+                };   
+
 
                 // $return = {
                 //     "UUID" : "12312-wefriwe234234",
@@ -87,8 +102,7 @@ var vm = new Vue({
                 //     }
                 // }
 
-                // Check the UUID from the response against the UUID saved currently
-
+                
                 // If they are different then continue to process the update
 
                 // Get the new layout type
@@ -96,11 +110,11 @@ var vm = new Vue({
                 // Set it to currentView
 
                 // Send through the data
-
+/*
             }, (response) => {
                 // error callback
                 console.log('failure');
-            });
+            });*/
         }
     }
 });
