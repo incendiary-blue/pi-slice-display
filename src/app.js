@@ -24,11 +24,11 @@ var vm = new Vue({
 
     ready(){
         console.log('Vue is running');
-        this.updateData();
+        /*this.updateData();*/
 
-        // setInterval(function () {
-        //   this.updateData();
-        // }.bind(this), 1000);
+        setInterval(function () {
+           this.updateData();
+        }.bind(this), 50000);
 
     },
 
@@ -39,8 +39,14 @@ var vm = new Vue({
     methods: {
 
         updateData: function () {
-          
-        }
 
+            this.$http.get('/google.com').then((response) => {
+            // success callback
+            console.log('success');
+            }, (response) => {
+            // error callback
+            console.log('failure');
+            });
+        }
     }
 });
