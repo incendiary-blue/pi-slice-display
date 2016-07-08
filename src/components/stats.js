@@ -1,5 +1,24 @@
 import Vue from '../vue';
 
+// View expects 
+// data = {
+//     "message" : "Message",
+//      "stats": [
+//         {
+//             "stat" : "21%",
+//             "title": "Title 1"
+//         },
+//         {
+//             "stat" : "28.32 hours",
+//             "title": "Title 2"
+//         },
+//         {
+//             "stat" : "12.5 minutes",
+//             "title": "Title 3"
+//         }
+//     ]
+// }
+
 export default Vue.extend({
 
     props: ['data', 'serial'],
