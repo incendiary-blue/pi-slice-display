@@ -1,6 +1,7 @@
 import Vue from './vue';
 import Welcome from './components/welcome';
 import Stats from './components/stats';
+import Carousel from './components/carousel';
 
 var vm = new Vue({
 
@@ -24,19 +25,20 @@ var vm = new Vue({
         console.log('Vue is running');
         this.updateData();
 
-        // setInterval(function () {
-        //    this.updateData();
-        // }.bind(this), 50000);
+        setInterval(function () {
+           this.updateData();
+        }.bind(this), 300000);
 
     },
 
     components: { 
         Welcome,
-        Stats
+        Stats, 
+        Carousel
     },
     
     methods: {
-
+        
         updateData: function () {
 
             // The connection URL is going to be www.pislice.online/getDisplayContent/ + this.serial{id}
@@ -46,9 +48,14 @@ var vm = new Vue({
 
                 this.response = {
                     'UUID' : "12312-wefriwe234234",
-                    "layout" : "stats",
+                    "layout" : "carousel",
                     "data" : {
                         "message" : "This is the welcome message",
+                        "images" : [
+                            'http://dummyimage.com/600x400/000/fff&text=Test+1',
+                            'http://dummyimage.com/600x400/000/fff&text=Test+2',
+                            'http://dummyimage.com/600x400/000/fff&text=Test+3'
+                        ],
                         "stats": [
                             {
                                 "stat" : "21%",
@@ -63,6 +70,7 @@ var vm = new Vue({
                                 "title": "Title 3"
                             }
                         ]
+
                     }
                 }
                 
