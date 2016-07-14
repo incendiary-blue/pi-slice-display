@@ -1,4 +1,6 @@
 import Vue from './vue';
+Vue.use(require('vue-resource'));
+
 import Welcome from './components/welcome';
 import Stats from './components/stats';
 import Carousel from './components/carousel';
@@ -25,9 +27,9 @@ var vm = new Vue({
         console.log('Vue is running');
         this.updateData();
 
-        setInterval(function () {
-           this.updateData();
-        }.bind(this), 300000);
+//        setInterval(function () {
+//           this.updateData();
+//        }.bind(this), 1000);
 
     },
 
@@ -43,36 +45,36 @@ var vm = new Vue({
 
             // The connection URL is going to be www.pislice.online/getDisplayContent/ + this.serial{id}
 
-            /*this.$http.get('//google.com').then((response) => {*/
+            this.$http.get('//pislice.online/getcontent/' + this.serial).then((response) => {
                 // success callback
 
-                this.response = {
-                    'UUID' : "12312-wefriwe234234",
-                    "layout" : "carousel",
-                    "data" : {
-                        "message" : "This is the welcome message",
-                        "images" : [
-                            'http://dummyimage.com/600x400/000/fff&text=Test+1',
-                            'http://dummyimage.com/600x400/000/fff&text=Test+2',
-                            'http://dummyimage.com/600x400/000/fff&text=Test+3'
-                        ],
-                        "stats": [
-                            {
-                                "stat" : "21%",
-                                "title": "Title 1"
-                            },
-                            {
-                                "stat" : "28.32 hours",
-                                "title": "Title 2"
-                            },
-                            {
-                                "stat" : "12.5 minutes",
-                                "title": "Title 3"
-                            }
-                        ]
-
-                    }
-                }
+//                this.response = {
+//                    'UUID' : "12312-wefriwe234234",
+//                    "layout" : "carousel",
+//                    "data" : {
+//                        "message" : "This is the welcome message",
+//                        "images" : [
+//                            'http://dummyimage.com/600x400/000/fff&text=Test+1',
+//                            'http://dummyimage.com/600x400/000/fff&text=Test+2',
+//                            'http://dummyimage.com/600x400/000/fff&text=Test+3'
+//                        ],
+//                        "stats": [
+//                            {
+//                                "stat" : "21%",
+//                                "title": "Title 1"
+//                            },
+//                            {
+//                                "stat" : "28.32 hours",
+//                                "title": "Title 2"
+//                            },
+//                            {
+//                                "stat" : "12.5 minutes",
+//                                "title": "Title 3"
+//                            }
+//                        ]
+//
+//                    }
+//                }
                 
                 console.log('Current UUID: ' + this.currentUUID);  
                 console.log('UUID from response: ' + this.response.UUID);        
@@ -134,10 +136,10 @@ var vm = new Vue({
 
                 // Send through the data
 
-            /*}, (response) => {
+            }, (response) => {
                 // error callback
                 console.log('failure');
-            });*/
+            });
         }
     }
 });
