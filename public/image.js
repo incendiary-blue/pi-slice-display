@@ -27,7 +27,7 @@ export default Vue.extend({
 
     methods: {
         checkNotNull () {
-            this.image = (this.data.image == "http://pislice.online") ? "/no-default.png" : this.data.image ;
+            this.image = (this.data.image == null) ? "/no-default.png" : this.data.image ;
         }
     }
     
