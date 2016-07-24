@@ -44,7 +44,7 @@ gulp.task('copy', ['clean:dist'], function() {
   return gulp.src([
         'src/index.html',
         'src/components/*.*',
-        'src/img/**/*.*',
+        'src/images/**/*.*',
         'src/fonts/**/*.*'
     ])
     .pipe(gulp.dest('public/'));

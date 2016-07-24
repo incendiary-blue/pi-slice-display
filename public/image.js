@@ -9,12 +9,10 @@ data = {
 
 export default Vue.extend({
 
-    props: ['data', 'serial'],
+    props: ['data'],
 
     template: `
-        <div class="image" style="background-image: url('{{image}}') ;">
-            
-        </div>
+        <div class="image" v-bind:style="{ backgroundImage: 'url(' + image + ')' }"></div>
     `,
 
     data: () => {
@@ -24,15 +22,13 @@ export default Vue.extend({
     },
 
     ready(){
-        console.log('Image Running');
-
-        this.image = this.data.image;
-         console.log(this.data.image);
+        this.checkNotNull();
     },
 
-
     methods: {
-
+        checkNotNull () {
+            this.image = (this.data.image == "http://pislice.online") ? "/no-default.png" : this.data.image ;
+        }
     }
     
 });
