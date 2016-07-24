@@ -26,7 +26,7 @@ export default Vue.extend({
     },
 
     ready(){
-        console.log(this.data);
+        console.log('Welcome Running');
     },
 
 
