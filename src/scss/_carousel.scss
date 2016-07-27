@@ -1,3 +1,45 @@
-.carousel {
-	
+.slider-wrapper {
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    
+    .slide {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+        -webkit-transition: opacity 1.1s ease, -webkit-transform 3s ease-out;
+        transition: opacity 1.1s ease, transform 3s ease-out;
+        position: absolute;
+    }
 }
+/* //------------------------------------------------
+//Transitions and animations
+//------------------------------------------------ */
+.slider-wrapper {
+    .current-slide {
+        -webkit-transition: -webkit-transform 1s ease-out;
+        transition: transform 1s ease-out;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        z-index: 1;
+    }
+    .previous-slide {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+    .next-slide {
+        -webkit-transform: translateX(70%);
+        transform: translateX(70%);
+    }
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+    font-size: 18px;
+}
+    

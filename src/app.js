@@ -13,7 +13,7 @@ var vm = new Vue({
     data: {
         currentUUID: '',
         // Current Layout
-        currentView: 'welcome',
+        currentView: 'Carousel',
         data: {}
     },
 
@@ -25,11 +25,10 @@ var vm = new Vue({
 
     ready(){
         console.log('Vue is running');
-        this.updateData();
 
-//        setInterval(function () {
-//           this.updateData();
-//        }.bind(this), 1000);
+        setInterval(function () {
+            this.updateData();
+        }.bind(this), 30000);
 
     },
 
