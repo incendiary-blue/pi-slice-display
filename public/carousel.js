@@ -1,5 +1,15 @@
 import Vue from '../vue';
 
+// Layout expects 
+// data = {
+//      images: [
+//         'http://wallpaperlayer.com/img/2015/5/hd-space-wallpapers-5743-6005-hd-wallpapers.jpg',
+//            'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/space-wallpaper-1.jpg',
+//            'https://wallpapersinbox.files.wordpress.com/2012/08/hd-space-6.jpg',
+//            'http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/09/3D-Space-HD-Desktop-Wallpapers.jpg'
+//     ]
+// }
+
 // This directive takes the current slide object params and sets the correct
 // classes as the current slide updates
 Vue.directive('show-slide', {
@@ -31,7 +41,8 @@ export default Vue.extend({
                     :slide-id="$index"
                     :prev-slide="prevSlide"
                     v-show-slide="currentSlide"
-                    v-bind:style="{ backgroundImage: 'url(' + image.url + ')' }"></div>
+                    v-bind:style="{ backgroundImage: 'url(' + image.url + ')' }">
+                </div>
             </div>
         </div>
     `,
@@ -39,18 +50,16 @@ export default Vue.extend({
     data: function() {
         return {
             currentSlide: 0,
-            images: []
+            images: [
+                'http://wallpaperlayer.com/img/2015/5/hd-space-wallpapers-5743-6005-hd-wallpapers.jpg',
+                'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/space-wallpaper-1.jpg',
+                'https://wallpapersinbox.files.wordpress.com/2012/08/hd-space-6.jpg',
+                'http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/09/3D-Space-HD-Desktop-Wallpapers.jpg'
+            ]
         }
     },
 
     ready(){
-    
-        this.images =  [
-            'http://wallpaperlayer.com/img/2015/5/hd-space-wallpapers-5743-6005-hd-wallpapers.jpg',
-            'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/space-wallpaper-1.jpg',
-            'https://wallpapersinbox.files.wordpress.com/2012/08/hd-space-6.jpg',
-            'http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/09/3D-Space-HD-Desktop-Wallpapers.jpg'
-        ];
 
         this.images = this.images.map((image, i) => {
             let data = {url : image, index: i};
