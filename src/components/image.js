@@ -12,22 +12,29 @@ export default Vue.extend({
     props: ['data'],
 
     template: `
-        <div class="image" v-bind:style="{ backgroundImage: 'url(' + image + ')' }"></div>
+        <div class="image" v-bind:style="{ backgroundImage: 'url(' + currentImage + ')' }"></div>
     `,
 
     data: () => {
         return {
-            image: ""
+            currentImage: ""
         }
     },
 
     ready(){
+        console.log("Image ready");
         this.checkNotNull();
     },
 
     methods: {
         checkNotNull () {
-            this.image = (this.data.image == null) ? "/no-default.png" : this.data.image ;
+            this.currentImage = (this.data.image == null) ? "/no-default.png" : this.data.image ;
+        }
+    },
+
+    watch : {
+        data: function(){
+            this.checkNotNull()
         }
     }
     

@@ -31,7 +31,7 @@ Vue.directive('show-slide', {
 });
 
 export default Vue.extend({
-    props: ['data', 'serial'],
+    props: ['data'],
 
     template: `
         <div class="slider-wrapper">
@@ -50,31 +50,26 @@ export default Vue.extend({
     data: function() {
         return {
             currentSlide: 0,
-            images: [
-                'http://wallpaperlayer.com/img/2015/5/hd-space-wallpapers-5743-6005-hd-wallpapers.jpg',
-                'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/space-wallpaper-1.jpg',
-                'https://wallpapersinbox.files.wordpress.com/2012/08/hd-space-6.jpg',
-                'http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/09/3D-Space-HD-Desktop-Wallpapers.jpg'
-            ]
+            speed: 5,
+            images: []
         }
     },
 
     ready(){
 
-        this.images = this.images.map((image, i) => {
-            let data = {url : image, index: i};
-            return data;
-        });
+        this.setImagesArray();
 
         // Once ready run a loop every X seconds and call this.changeSlideNext()
         setInterval(function () {
             this.changeSlideNext();
-        }.bind(this), 10000);
+        }.bind(this), (this.speed * 1000));
 
     },
 
     computed: {
         prevSlide: function() {
+            // Calculate the next slide to be active
+            // so we can apply the transitions correctly.
             if(this.currentSlide == 0)
                 return this.images.length-1;
             return this.currentSlide - 1;
@@ -83,12 +78,35 @@ export default Vue.extend({
 
     methods: {
 
+        setImagesArray () {
+            // Map the images data array to one that contains the index, allowing
+            // us to transition through the slides easier
+            if(this.data.images){
+                this.images = this.data.images.map((image, i) => {
+                    let data = {url : image, index: i};
+                    return data;
+                });
+            }
+        },
+
         changeSlideNext () {
+            // Change to the next slide in the list
+            // If this current slide is the same length as the array
+            // we know we are at the end so we set the slide to 0
             if(this.currentSlide == this.images.length-1){
                 this.currentSlide = 0;
             }
             else this.currentSlide++;
         }
     
+    },
+
+    watch : {
+        // Watch the data prop for changes and on change
+        // run the image checkNotNull function to update
+        data: function(){
+            this.currentSlide = 0;
+            this.setImagesArray()
+        }
     }
 });

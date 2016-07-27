@@ -13,8 +13,8 @@ var vm = new Vue({
     data: {
         currentUUID: '',
         // Current Layout
-        currentView: 'Carousel',
-        data: {}
+        currentView: 'welcome',
+        data: {},
     },
 
     computed: {
@@ -28,7 +28,7 @@ var vm = new Vue({
 
         setInterval(function () {
             this.updateData();
-        }.bind(this), 30000);
+        }.bind(this), 5000);
 
     },
 
@@ -43,7 +43,7 @@ var vm = new Vue({
         
         updateData: function () {
 
-            this.$http.get('//pislice.online/api/v1/getcontent/' + this.serial).then((response) => {
+            this.$http.get('//pislice.local/api/v1/getcontent/' + this.serial).then((response) => {
                 // success callback
                 let returnData = response.json();
                 
