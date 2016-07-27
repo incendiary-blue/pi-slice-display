@@ -46,10 +46,10 @@ export default Vue.extend({
     ready(){
     
         this.images =  [
-            'http://csscience.com/responsiveslidercss3/CouldDragonByBjzaba.png',
-            'http://csscience.com/responsiveslidercss3/MountainFortByBjzaba.png',
-            'http://csscience.com/responsiveslidercss3/MountainOutpostByBjzaba.png',
-            'http://csscience.com/responsiveslidercss3/CliffsByBjzaba.png'
+            'http://wallpaperlayer.com/img/2015/5/hd-space-wallpapers-5743-6005-hd-wallpapers.jpg',
+            'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/space-wallpaper-1.jpg',
+            'https://wallpapersinbox.files.wordpress.com/2012/08/hd-space-6.jpg',
+            'http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/09/3D-Space-HD-Desktop-Wallpapers.jpg'
         ];
 
         this.images = this.images.map((image, i) => {
