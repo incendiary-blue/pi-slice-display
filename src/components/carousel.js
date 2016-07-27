@@ -1,19 +1,7 @@
 import Vue from '../vue';
 
-const sliderData = [
-    {id: 0, src: 'http://csscience.com/responsiveslidercss3/CouldDragonByBjzaba.png'},
-    {id: 1, src: 'http://csscience.com/responsiveslidercss3/MountainFortByBjzaba.png'},
-    {id: 2, src: 'http://csscience.com/responsiveslidercss3/MountainOutpostByBjzaba.png'},
-    {id: 3, src: 'http://csscience.com/responsiveslidercss3/CliffsByBjzaba.png'}
-];
-
-Vue.directive('assign-image', {
-    update: function(id) {
-        let img = sliderData[id];
-        this.el.style.backgroundImage = "url("+img.src+")"
-    }
-});
-
+// This directive takes the current slide object params and sets the correct
+// classes as the current slide updates
 Vue.directive('show-slide', {
     params: ['prev-slide','slide-id'],
     update: function (current) {
@@ -36,59 +24,62 @@ export default Vue.extend({
     props: ['data', 'serial'],
 
     template: `
-    <div class="slider-wrapper">
-        <div class="slider-overflow">
-            <div v-for="slide in slides"
-                v-assign-image="$index"
-                :slide-id="$index"
-                :prev-slide="prevSlide"
-                class="slide slide-transition"
-                v-show-slide="currentSlide">
+        <div class="slider-wrapper">
+            <div class="slider-overflow">
+                <div v-for="image in images" 
+                    class="slide slide-transition"
+                    :slide-id="$index"
+                    :prev-slide="prevSlide"
+                    v-show-slide="currentSlide"
+                    v-bind:style="{ backgroundImage: 'url(' + image.url + ')' }"></div>
             </div>
         </div>
-    </div>
     `,
 
     data: function() {
         return {
-            slides: sliderData,
             currentSlide: 0,
+            images: []
         }
     },
 
     ready(){
+    
+        this.images =  [
+            'http://csscience.com/responsiveslidercss3/CouldDragonByBjzaba.png',
+            'http://csscience.com/responsiveslidercss3/MountainFortByBjzaba.png',
+            'http://csscience.com/responsiveslidercss3/MountainOutpostByBjzaba.png',
+            'http://csscience.com/responsiveslidercss3/CliffsByBjzaba.png'
+        ];
+
+        this.images = this.images.map((image, i) => {
+            let data = {url : image, index: i};
+            return data;
+        });
 
         // Once ready run a loop every X seconds and call this.changeSlideNext()
         setInterval(function () {
             this.changeSlideNext();
-        }.bind(this), 5000);
+        }.bind(this), 10000);
+
     },
 
     computed: {
         prevSlide: function() {
             if(this.currentSlide == 0)
-                return this.slides.length-1;
+                return this.images.length-1;
             return this.currentSlide - 1;
-        },
-        nextSlide: function() {
-            if(this.currentSlide == this.slides.length-1)
-                return 0;
-            return this.currentSlide + 1;
         }
     },
 
     methods: {
-        changeSlideNext: function() {
-            if(this.currentSlide == this.slides.length-1){
+
+        changeSlideNext () {
+            if(this.currentSlide == this.images.length-1){
                 this.currentSlide = 0;
             }
             else this.currentSlide++;
-        },
-        changeSlidePrev: function() {
-            if(this.currentSlide == 0){
-                this.currentSlide = this.slides.length-1;
-            }
-            else this.currentSlide -= 1;
         }
+    
     }
 });
