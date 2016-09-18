@@ -46,6 +46,9 @@ var vm = new Vue({
             this.$http.get('//pislice.local/api/v1/getcontent/' + this.serial).then((response) => {
                 // success callback
                 let returnData = response.json();
+
+                console.log("return data = ", returnData);
+                
                 
                 // Check the UUID from the response against the UUID saved currently
                 if (returnData.uuid == this.currentUUID) {
