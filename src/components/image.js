@@ -1,12 +1,5 @@
 import Vue from '../vue';
 
-/*
-View expects
-data = {
-    "image" : 'http://dummyimage.com/600x400/000/fff&text=Test+1'
-}
-*/
-
 export default Vue.extend({
 
     props: ['data'],
@@ -22,13 +15,12 @@ export default Vue.extend({
     },
 
     ready(){
-        console.log("Image ready");
         this.checkNotNull();
     },
 
     methods: {
         checkNotNull () {
-            this.currentImage = (this.data.image == null) ? "/no-default.png" : this.data.image ;
+            this.currentImage = (this.data.images[0].filename == null) ? "/no-default.png" : this.data.images[0].filename ;
         }
     },
 
