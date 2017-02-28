@@ -34,6 +34,10 @@ export default Vue.extend({
         if(this.data.components[0].component_type_id == "1"){
             this.component = "Image";
             this.component_data = this.data.components[0];
+        } else {
+            // It's a carousel
+            this.component = "Carousel";
+            this.component_data = this.data.components[0];
         }
 
     },

@@ -1,5 +1,7 @@
 import Vue from '../vue';
 
+import {getConfig} from '../config';
+
 export default Vue.extend({
 
     props: ['data'],
@@ -20,7 +22,7 @@ export default Vue.extend({
 
     methods: {
         checkNotNull () {
-            this.currentImage = (this.data.images[0].filename == null) ? "/no-default.png" : this.data.images[0].filename ;
+            this.currentImage = (this.data.images[0].filename == null) ? "/no-default.png" : getConfig().IMAGE_PATH + `/${this.data.images[0].team_id}/` + this.data.images[0].filename ;
         }
     },
 

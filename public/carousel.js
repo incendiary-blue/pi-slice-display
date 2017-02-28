@@ -1,5 +1,7 @@
 import Vue from '../vue';
 
+import {getConfig} from '../config';
+
 // Layout expects 
 // data = {
 //      images: [
@@ -83,7 +85,10 @@ export default Vue.extend({
             // us to transition through the slides easier
             if(this.data.images){
                 this.images = this.data.images.map((image, i) => {
-                    let data = {url : image, index: i};
+                    let data = {
+                        url : getConfig().IMAGE_PATH + `/${image.team_id}/` + image.filename,
+                        index: i
+                    };
                     return data;
                 });
             }

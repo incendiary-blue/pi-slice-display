@@ -1,6 +1,8 @@
 import Vue from './vue';
 Vue.use(require('vue-resource'));
 
+import {getConfig} from './config';
+
 import Welcome from './components/welcome';
 import Single from './components/single';
 import Split from './components/split';
@@ -43,10 +45,22 @@ var vm = new Vue({
     },
     
     methods: {
+
+        getRoutes() {
+            const URL = "//localhost:8000";
+            const API_ENDPOINT = URL + "/api/v1";
+
+            return {
+                "URL": URL,
+                "API_ENDPOINT": API_ENDPOINT,
+                "GET_CONTENT": API_ENDPOINT + "/getcontent",
+                "IMAGE_PATH": URL + '/file/image',
+            }
+        },
         
         updateData: function () {
-
-            this.$http.get('//pislice.local/api/v1/getcontent/' + this.serial).then((response) => {
+            // Let's use our config we imported.
+            this.$http.get(getConfig().GET_CONTENT + '/' + this.serial).then((response) => {
                 // success callback
                 this.returnData = response.json();
 
@@ -66,7 +80,7 @@ var vm = new Vue({
                                     component_type_id: 1,
                                     images: [
                                         {
-                                            filename: this.returnData.data.image
+                                            filename: this.getRoutes().IMAGE_PATH + `/${this.returnData.data.team_id}/` + this.returnData.data.image
                                         }
                                     ]
                                 }

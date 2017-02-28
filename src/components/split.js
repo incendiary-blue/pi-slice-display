@@ -35,7 +35,6 @@ export default Vue.extend({
     },
 
     ready(){
-
         this.data.components.forEach((component)=>{
 
             if(component.location_id == 1){
