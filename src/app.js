@@ -6,6 +6,7 @@ import {getConfig} from './config';
 import Welcome from './components/welcome';
 import Single from './components/single';
 import Split from './components/split';
+import ThreeUp from './components/three-up';
 
 var vm = new Vue({
 
@@ -91,7 +92,12 @@ var vm = new Vue({
                         this.rotateLayouts(this.returnData.display_group.layouts);
 
                     } else {
-                        this.currentView = this.returnData.display_group.layouts[0].type.name;
+
+                        if(this.returnData.display_group.layouts[0].type.name == '3-Up') {
+                            this.currentView = ThreeUp;
+                        } else {
+                            this.currentView = this.returnData.display_group.layouts[0].type.name;
+                        }
                         this.data = this.returnData.display_group.layouts[0];
                     }
 
@@ -112,7 +118,11 @@ var vm = new Vue({
             
             layouts.forEach((layout)=>{
                 if(layout.order == this.currentLayoutIndex){
-                    this.currentView = layout.type.name;
+                    if(layout.type.name == '3-Up') {
+                        this.currentView = ThreeUp;
+                    } else {
+                        this.currentView = layout.type.name;
+                    }
                     this.currentLayoutTime = layout.duration;
                     this.data = layout;
                 }
