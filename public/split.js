@@ -31,7 +31,8 @@ export default Vue.extend({
     },
 
     components: { 
-        Image
+        Image,
+        Carousel
     },
 
     ready(){
@@ -42,11 +43,18 @@ export default Vue.extend({
                 if(component.component_type_id == "1"){
                     this.left_component = "Image";
                     this.left_component_data = component;
+                } else {
+                    this.left_component = "Carousel";
+                    this.left_component_data = component;
                 }
+
             } else {
                 // location 2
                 if(component.component_type_id == "1"){
                     this.right_component = "Image";
+                    this.right_component_data = component;
+                } else {
+                    this.right_component = "Carousel";
                     this.right_component_data = component;
                 }
             }
