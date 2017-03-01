@@ -7,6 +7,6 @@ export function getConfig() {
         "URL": URL,
         "API_ENDPOINT": API_ENDPOINT,
         "GET_CONTENT": API_ENDPOINT + "/getcontent",
-        "IMAGE_PATH": URL + '/file/image',
+        "IMAGE_PATH": API_ENDPOINT + '/file/image',
     }
 }

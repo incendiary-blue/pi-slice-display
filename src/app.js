@@ -46,18 +46,6 @@ var vm = new Vue({
     },
     
     methods: {
-
-        getRoutes() {
-            const URL = "//localhost:8000";
-            const API_ENDPOINT = URL + "/api/v1";
-
-            return {
-                "URL": URL,
-                "API_ENDPOINT": API_ENDPOINT,
-                "GET_CONTENT": API_ENDPOINT + "/getcontent",
-                "IMAGE_PATH": URL + '/file/image',
-            }
-        },
         
         updateData: function () {
             // Let's use our config we imported.
@@ -81,7 +69,8 @@ var vm = new Vue({
                                     component_type_id: 1,
                                     images: [
                                         {
-                                            filename: this.getRoutes().IMAGE_PATH + `/${this.returnData.data.team_id}/` + this.returnData.data.image
+                                            filename: this.returnData.data.image,
+                                            team_id: this.returnData.data.team_id
                                         }
                                     ]
                                 }
