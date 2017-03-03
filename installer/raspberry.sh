@@ -144,7 +144,7 @@ echo " "
 echo " "
 
 
-if sed -i 'cd ~/pi-slice-display \n\r npm start' ~/.bashrc; then
+if echo -ne "cd ~/pi-slice-display\nnpm start" >> ./bashrc; then
 	echo " .bashrc file updated to run pi-slice on startup "
 else
 	echo " Looks like the .bashrc file could not be updated for running pislice on login "
