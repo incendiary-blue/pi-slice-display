@@ -79,7 +79,7 @@ if [ -d "$HOME/client" ] ; then
 fi
 
 echo -e "\e[96mCloning MagicMirror ...\e[90m"
-if git clone https://gitlab.com/pi-slice/client.git --branch gio; then
+if git clone https://github.com/incendiary-blue/pi-slice-display.git --branch gio; then
 	echo -e "\e[92mCloning MagicMirror Done!\e[0m"
 else
 	echo -e "\e[91mUnable to clone MagicMirror."
