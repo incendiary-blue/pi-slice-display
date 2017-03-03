@@ -68,7 +68,7 @@ fi
 
 #Install magic mirror
 cd ~
-if [ -d "$HOME/client" ] ; then
+if [ -d "$HOME/pi-slice-display" ] ; then
 	echo -e "\e[93mIt seems like MagicMirror is already installed."
 	echo -e "To prevent overwriting, the installer will be aborted."
 	echo -e "Please rename the \e[1m~/MagicMirror\e[0m\e[93m folder and try again.\e[0m"
@@ -86,10 +86,25 @@ else
 	exit;
 fi
 
-cd ~/client || exit
+cd ~/pi-slice-display || exit
 echo -e "\e[96mInstalling dependencies ...\e[90m"
 if npm install; then 
 	echo -e "\e[92mDependencies installation Done!\e[0m"
+	# Script to set Pi Serial number into screeen project
+	# This script should be run as root (or with sudo) to change names
+	# If run by a user it will report changes, but will NOT implement them
+	#NOTE the last 6 bytes of MAC and CPUID are identical
+	CPUID=$(awk '/Serial/ {print $3}' /proc/cpuinfo | sed 's/^0*//')
+
+	echo "CPUID" $CPUID
+
+	#Write the CPUID into a js file for indentification of this device.
+
+	SERIAL_JSON="var serial = '$CPUID'"
+
+	echo $SERIAL_JSON > ./public/serial.js
+
+	echo "Written file"
 else
 	echo -e "\e[91mUnable to install dependencies!"
 	exit;
