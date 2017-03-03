@@ -1,6 +1,6 @@
 export function getConfig() {
     // //pislice.local
-    const URL = "//localhost:8000";
+    const URL = "http://dev.pislice.com.10.10.73.156.xip.io:8888/";
     const API_ENDPOINT = URL + "/api/v1";
 
     return {
