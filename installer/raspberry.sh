@@ -142,3 +142,12 @@ echo " "
 echo -e "\e[92mWe're ready! Run \e[1m\e[97mDISPLAY=:0 npm start\e[0m\e[92m from the ~/client directory to start your MagicMirror.\e[0m"
 echo " "
 echo " "
+
+
+if sed -i 'cd ~/pi-slice-display \n\r npm start' ~/.bashrc; then
+	echo " .bashrc file updated to run pi-slice on startup "
+else
+	echo " Looks like the .bashrc file could not be updated for running pislice on login "
+fi
+
+echo " "
