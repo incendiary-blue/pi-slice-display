@@ -144,7 +144,7 @@ echo " "
 echo " "
 
 
-if echo -ne "cd ~/pi-slice-display\nnpm start" >> ./bashrc; then
+if echo -ne "cd ~/pi-slice-display\nnpm start" >> ./etc/init.d/rc.local; then
 	echo " .bashrc file updated to run pi-slice on startup "
 else
 	echo " Looks like the .bashrc file could not be updated for running pislice on login "
